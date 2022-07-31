@@ -14,10 +14,12 @@ header('Access-Control-Allow-Origin: *');
 
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
+$numero = $parts[3] ?? "";
+
 $database = new DataBase("us-cdbr-east-06.cleardb.net", "heroku_d93ba097fb66e79", "b0c8908c00dc37", "3602e713");
 
 $votacaoDAO = new VotacaoDAO($database);
 
 $controller = new VotacaoController($votacaoDAO);
 
-$controller->processRequest($_SERVER["REQUEST_METHOD"]);
+$controller->processRequest($_SERVER["REQUEST_METHOD"], $numero);

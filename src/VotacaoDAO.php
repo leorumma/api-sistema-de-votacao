@@ -4,13 +4,11 @@ class VotacaoDAO
 {
     private mysqli $conn;
 
-    public function __construct(Database $database)
-    {
+    public function __construct(Database $database) {
         $this->conn = $database->getConnection();
     }
 
-    public function getAll(): stdClass
-    {
+    public function getAll(): stdClass {
         $candidatos = array();
         $qtd_etapas = 0;
         $etapas = array();
@@ -72,4 +70,19 @@ class VotacaoDAO
         return $resp;
     }
 
+    public function votar($numero): string {
+        $sql_quantidade_votos = "SELECT `votos` FROM `candidato` WHERE `numero`='$numero'";
+        $result = mysqli_query($this->conn, $sql_quantidade_votos);
+        if ($result->num_rows == 1) {
+            $row = mysqli_fetch_array($result);
+            $voto = (int) $row["votos"];
+            $voto++;
+            if(mysqli_query($this->conn, "UPDATE `candidato` SET `votos`='$voto' WHERE `numero`='$numero'")) {
+                return 'voto computado</br>';
+            } else {
+                return 'falhou</br>';
+            }
+        }
+        return "";
+    }
 }

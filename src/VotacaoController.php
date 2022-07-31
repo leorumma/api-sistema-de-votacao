@@ -5,19 +5,20 @@ class VotacaoController {
     public function __construct(private readonly VotacaoDAO $votacaoDAO) {
     }
 
-    public function processRequest(string $method): void {
-        $this->processCollectionRequest($method);
+    public function processRequest(string $method, string $numero): void {
+        $this->processCollectionRequest($method, $numero);
     }
 
-    private function processCollectionRequest(string $method): void {
-        switch ($method) {
-            case "GET":
-                echo json_encode($this->votacaoDAO->getAll());
-                break;
-
-            default:
-                http_response_code(405);
-                header("Allow: GET, POST");
+    private function processCollectionRequest(string $method, string $numero): void {
+        if ($method == "GET") {
+            echo json_encode($this->votacaoDAO->getAll());
+            return;
         }
+        if ($method == "POST" && !empty($numero)) {
+            echo json_encode($this->votacaoDAO->votar($numero));
+            return;
+        }
+        http_response_code(405);
+        header("Allow: GET, POST");
     }
 }
