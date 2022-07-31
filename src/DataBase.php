@@ -8,15 +8,12 @@ class DataBase {
 
     }
 
-    public function getConnection(): PDO
-
-    {
-        $dsn = "mysql:host={$this->host};dbname={$this->name};charset=utf8";
-
-        return new PDO($dsn, $this->user, $this->password, [
-            PDO::ATTR_EMULATE_PREPARES => false,
-            PDO::ATTR_STRINGIFY_FETCHES => false
-        ]);
+    public function getConnection(): mysqli {
+        $conn = mysqli_connect($this->host, $this->user, $this->password, $this->name);
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        return $conn;
     }
 
 }
