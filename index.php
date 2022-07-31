@@ -14,7 +14,7 @@ header('Access-Control-Allow-Origin: *');
 
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
-$numero = $parts[3] ?? "";
+$numero = $parts[2] ?? "";
 
 $database = new DataBase("us-cdbr-east-06.cleardb.net", "heroku_d93ba097fb66e79", "b0c8908c00dc37", "3602e713");
 
