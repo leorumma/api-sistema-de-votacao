@@ -21,8 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `urna_db`
 --
-CREATE DATABASE IF NOT EXISTS `urna_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
-USE `urna_db`;
+CREATE DATABASE IF NOT EXISTS `heroku_d93ba097fb66e79` DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci;
+USE `heroku_d93ba097fb66e79`;
 
 -- --------------------------------------------------------
 
