@@ -10,6 +10,8 @@ set_exception_handler("ErrorHandler::handleException");
 
 header("Content-type: application/json; charset=UTF-8");
 
+header('Access-Control-Allow-Origin: *');
+
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
 $database = new DataBase("us-cdbr-east-06.cleardb.net", "heroku_d93ba097fb66e79", "b0c8908c00dc37", "3602e713");
