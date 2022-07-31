@@ -21,6 +21,7 @@ class VotacaoDAO {
         }
 
         return $data;
+
     }
 
 }

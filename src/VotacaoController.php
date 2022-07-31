@@ -1,25 +1,12 @@
 <?php
 
-
 class VotacaoController {
 
     public function __construct(private readonly VotacaoDAO $votacaoDAO) {
     }
 
-    public function processRequest(string $method, ?string $id): void {
-        if ($id) {
-
-            $this->processResourceRequest($method, $id);
-
-        } else {
-
-            $this->processCollectionRequest($method);
-
-        }
-    }
-
-    private function processResourceRequest(string $method, string $id): void {
-
+    public function processRequest(string $method): void {
+        $this->processCollectionRequest($method);
     }
 
     private function processCollectionRequest(string $method): void {

@@ -9,6 +9,7 @@ class DataBase {
     }
 
     public function getConnection(): PDO
+
     {
         $dsn = "mysql:host={$this->host};dbname={$this->name};charset=utf8";
 
@@ -17,4 +18,5 @@ class DataBase {
             PDO::ATTR_STRINGIFY_FETCHES => false
         ]);
     }
+
 }
