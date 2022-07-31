@@ -1,9 +1,5 @@
 <?php
 
-namespace controller;
-
-use ErrorException;
-use Throwable;
 
 class ErrorHandler
 {

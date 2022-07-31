@@ -1,9 +1,5 @@
 <?php
 
-namespace dao;
-use Database;
-use PDO;
-
 class VotacaoDAO {
     private PDO $conn;
 

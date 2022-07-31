@@ -1,8 +1,5 @@
 <?php
 
-namespace controller;
-
-use dao\VotacaoDAO;
 
 class VotacaoController {
 
