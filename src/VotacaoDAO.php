@@ -1,7 +1,7 @@
 <?php
 
-class VotacaoDAO
-{
+class VotacaoDAO {
+
     private mysqli $conn;
 
     public function __construct(Database $database) {
@@ -70,7 +70,7 @@ class VotacaoDAO
         return $resp;
     }
 
-    public function votar($numero): string {
+    public function updateVotosByNumero($numero): string {
         $sql_quantidade_votos = "SELECT `votos` FROM `candidato` WHERE `numero`='$numero'";
         $result = mysqli_query($this->conn, $sql_quantidade_votos);
         if ($result->num_rows == 1) {
@@ -84,5 +84,25 @@ class VotacaoDAO
             }
         }
         return "";
+    }
+
+    public function getAllResultsDesc(): Array  {
+        $candidatos = array();
+        $sql = "select * from heroku_d93ba097fb66e79.candidato c where c.votos > 0 order by c.votos desc";
+        $result = mysqli_query($this->conn, $sql);
+        while ($row = mysqli_fetch_array($result)) {
+            $cdt = new stdClass;
+            $cdt->numero = $row['numero'];
+            $cdt->nome = $row['nome'] ? utf8_encode($row['nome']) : "";
+            $cdt->partido = $row['partido'];
+            $cdt->foto = $row['foto'];
+            $cdt->nome_vice = $row['nome_vice'] ? utf8_encode($row['nome_vice']) : "";
+            $cdt->partido_vice = $row['partido_vice'];
+            $cdt->foto_vice = $row['foto_vice'];
+            $cdt->votos = $row['votos'];
+            $cdt->tipo_candidatura = strlen($row['numero']) == 5 ? "VEREADOR" : "PREFEITO";
+            array_push($candidatos, $cdt);
+        }
+        return $candidatos;
     }
 }
