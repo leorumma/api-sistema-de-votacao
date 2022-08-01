@@ -88,7 +88,7 @@ class VotacaoDAO {
 
     public function getAllResultsDesc(): Array  {
         $candidatos = array();
-        $sql = "select * from heroku_d93ba097fb66e79.candidato c where c.votos > 0 order by c.votos desc";
+        $sql = "select * from heroku_d93ba097fb66e79.candidato c where c.votos >= 0 order by c.votos desc";
         $result = mysqli_query($this->conn, $sql);
         while ($row = mysqli_fetch_array($result)) {
             $cdt = new stdClass;
@@ -104,5 +104,14 @@ class VotacaoDAO {
             array_push($candidatos, $cdt);
         }
         return $candidatos;
+    }
+
+    public function reiniciarEleicao() {
+        $sql = "update heroku_d93ba097fb66e79.candidato c set c.votos = 0";
+        if(mysqli_query($this->conn, $sql)) {
+            return 'Eleição reiniciada</br>';
+        } else {
+            return 'falhou</br>';
+        }
     }
 }

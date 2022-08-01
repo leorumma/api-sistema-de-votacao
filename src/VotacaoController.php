@@ -10,6 +10,10 @@ class VotacaoController {
             echo json_encode($this->votacaoDAO->getAll());
             return;
         }
+        if ($method == "GET" && $action == "reiniciar-votacao") {
+            echo json_encode($this->votacaoDAO->reiniciarEleicao());
+            return;
+        }
         if ($method == "POST" && $action == "votacao" && !empty($param)) {
             echo json_encode($this->votacaoDAO->updateVotosByNumero($param));
             return;
